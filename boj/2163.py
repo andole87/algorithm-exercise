@@ -1,0 +1,5 @@
+a = input().split(' ')
+n = int(a[0])
+m = int(a[1])
+count = (n-1) + (n * (m-1))
+print(count)
