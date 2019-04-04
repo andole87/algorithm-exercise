@@ -3,3 +3,6 @@ squad/
 woowa/
 .vscode/
 .vs/
+.DS_Store
+Pipfile
+Pipfile.lock
