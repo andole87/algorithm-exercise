@@ -1,9 +1,6 @@
-def pibo(n):
+def fibo(n):
     if n == 0:
         return 0
     if n == 1:
         return 1
-    return pibo(n-1) + pibo(n-2)
-
-
-
+    return fibo(n-1) + fibo(n-2)

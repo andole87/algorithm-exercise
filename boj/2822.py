@@ -10,3 +10,4 @@ for i in range(5):
 
 print(sm)
 print(" ".join(list(map(str,sorted(index)))))
+

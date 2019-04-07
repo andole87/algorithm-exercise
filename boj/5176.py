@@ -15,4 +15,3 @@ while k > 0:
             dup += 1
     print(dup)
     k -= 1
-
