@@ -6,4 +6,4 @@ for i in range(k):
         del r[-1]
     else:
         r.append(a)
-print(sum(r)) 
+print(sum(r))
