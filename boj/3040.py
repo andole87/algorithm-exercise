@@ -7,3 +7,4 @@ for x in it.combinations(nan,7):
     if sum(x) == 100:
         print(*sorted(x), sep="\n")
         break
+
