@@ -7,4 +7,4 @@ while t > 0:
         print("KIN")
     else:
         print(sum(a))
-    t -= 1 
+    t -= 1
