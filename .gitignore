@@ -6,3 +6,4 @@ woowa/
 .DS_Store
 Pipfile
 Pipfile.lock
+*Icon*
