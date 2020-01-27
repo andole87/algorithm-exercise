@@ -8,3 +8,6 @@ kakao/
 Pipfile
 Pipfile.lock
 *Icon*
+.gradle/
+build/
+out/
