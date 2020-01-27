@@ -3,7 +3,9 @@ package hash;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
+import java.util.function.ToIntFunction;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
@@ -14,6 +16,7 @@ public class P42579 {
         int[] plays = new int[]{500, 600, 150, 800, 2500};
 
         assertArrayEquals(new int[]{4, 1, 3, 0}, solution(genres, plays));
+        assertArrayEquals(new int[]{4, 1, 3, 0}, solution2(genres, plays));
     }
 
     public int[] solution(String[] genres, int[] plays) {
@@ -68,6 +71,57 @@ public class P42579 {
 
         @Override
         public int compareTo(Music o) {
+            if (o.plays == this.plays) {
+                return this.index - o.index;
+            }
+            return o.plays - this.plays;
+        }
+    }
+
+    public int[] solution2(String[] genres, int[] plays) {
+        return IntStream.range(0, genres.length)
+                .mapToObj(i -> new Music2(i, genres[i], plays[i]))
+                .collect(Collectors.groupingBy(Music2::getGenre, Collectors.toList()))
+                .entrySet().stream()
+                .sorted(Collections.reverseOrder(Map.Entry.comparingByValue(Comparator.comparingInt(totalPlaysOfMusics()))))
+                .map(entry -> entry.getValue().stream()
+                        .sorted()
+                        .limit(2)
+                        .collect(Collectors.toList()))
+                .flatMap(Collection::stream)
+                .mapToInt(Music2::getIndex)
+                .toArray();
+    }
+
+    private ToIntFunction<List<Music2>> totalPlaysOfMusics() {
+        return musics -> musics.stream().mapToInt(Music2::getPlays).sum();
+    }
+
+    private static class Music2 implements Comparable<Music2> {
+        private int index;
+        private String genre;
+        private int plays;
+
+        Music2(int index, String genre, int plays) {
+            this.index = index;
+            this.genre = genre;
+            this.plays = plays;
+        }
+
+        String getGenre() {
+            return genre;
+        }
+
+        int getIndex() {
+            return index;
+        }
+
+        int getPlays() {
+            return plays;
+        }
+
+        @Override
+        public int compareTo(Music2 o) {
             if (o.plays == this.plays) {
                 return this.index - o.index;
             }
