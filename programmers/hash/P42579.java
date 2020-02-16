@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class P42579 {
     @Test
@@ -52,32 +53,6 @@ public class P42579 {
         return results.stream().mapToInt(x -> x).toArray();
     }
 
-    private class Music implements Comparable<Music> {
-        private int index;
-        private int plays;
-
-        public Music(int index, int plays) {
-            this.index = index;
-            this.plays = plays;
-        }
-
-        public int getIndex() {
-            return index;
-        }
-
-        public int getPlays() {
-            return plays;
-        }
-
-        @Override
-        public int compareTo(Music o) {
-            if (o.plays == this.plays) {
-                return this.index - o.index;
-            }
-            return o.plays - this.plays;
-        }
-    }
-
     public int[] solution2(String[] genres, int[] plays) {
         return IntStream.range(0, genres.length)
                 .mapToObj(i -> new Music2(i, genres[i], plays[i]))
@@ -95,6 +70,13 @@ public class P42579 {
 
     private ToIntFunction<List<Music2>> totalPlaysOfMusics() {
         return musics -> musics.stream().mapToInt(Music2::getPlays).sum();
+    }
+
+    @Test
+    void name2() {
+        HashMap<String, Integer> map = new HashMap<>();
+        map.put("abc", 1);
+        assertTrue(map.containsKey("a"));
     }
 
     private static class Music2 implements Comparable<Music2> {
@@ -122,6 +104,32 @@ public class P42579 {
 
         @Override
         public int compareTo(Music2 o) {
+            if (o.plays == this.plays) {
+                return this.index - o.index;
+            }
+            return o.plays - this.plays;
+        }
+    }
+
+    private class Music implements Comparable<Music> {
+        private int index;
+        private int plays;
+
+        public Music(int index, int plays) {
+            this.index = index;
+            this.plays = plays;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public int getPlays() {
+            return plays;
+        }
+
+        @Override
+        public int compareTo(Music o) {
             if (o.plays == this.plays) {
                 return this.index - o.index;
             }
