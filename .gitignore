@@ -11,3 +11,4 @@ Pipfile.lock
 .gradle/
 build/
 out/
+*__init__.py

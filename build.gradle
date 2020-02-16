@@ -5,7 +5,7 @@ plugins {
 sourceSets {
     test {
         java {
-            srcDirs = ['boj', 'programmers', 'leetcode', 'codility']
+            srcDirs = ['boj/java', 'programmers', 'leetcode', 'codility']
         }
     }
 }
