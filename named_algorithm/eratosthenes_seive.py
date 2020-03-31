@@ -1,6 +1,3 @@
-import math
-
-
 def getPrimeList(end_int):
     a = [False, False] + [True]*(end_int - 1)
     primes = []
@@ -12,5 +9,6 @@ def getPrimeList(end_int):
                 a[j] = False
     return primes
 
-if __name__ == "__main__":
-    print(getPrimeList(100))
+a = int(input())
+
+print(getPrimeList(a))

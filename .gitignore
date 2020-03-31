@@ -12,3 +12,6 @@ Pipfile.lock
 build/
 out/
 *__init__.py
+bin/
+.settings/
+.classpath
