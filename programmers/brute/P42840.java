@@ -12,14 +12,6 @@ public class P42840 {
         Solution s = new Solution();
         int[] answers = new int[]{1, 3, 2, 4, 2};
         System.out.println(Arrays.toString(s.solution(answers)));
-//        Student3 s3 = new Student3();
-//        System.out.println(s3.getAnswer());
-//        System.out.println(s3.getAnswer());
-//        System.out.println(s3.getAnswer());
-//        System.out.println(s3.getAnswer());
-//        System.out.println(s3.getAnswer());
-//        System.out.println(s3.getAnswer());
-//        System.out.println(s3.getAnswer());
     }
 
     private static class Solution {
