@@ -1,17 +1,16 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.Objects;
-import java.util.Queue;
+import java.util.*;
 
 public class B2178 {
     private static int[][] road;
+    private static int n, m;
 
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         String[] s = br.readLine().split(" ");
-        int n = Integer.parseInt(s[0]);
-        int m = Integer.parseInt(s[1]);
+        n = Integer.parseInt(s[0]);
+        m = Integer.parseInt(s[1]);
 
         road = new int[n][m];
 
@@ -25,15 +24,30 @@ public class B2178 {
                 }
             }
         }
-
+        System.out.println(bfs());
     }
 
-    public static int bfs() {
-        Queue<Node> queue = new LinkedList<>();
-        int count = 0;
-        queue.add(new Node(0, 0));
+    private static int bfs() {
+        Queue<Node> q = new LinkedList<>();
+        int[][] visited = new int[n][m];
+        q.add(new Node(0, 0));
+        visited[0][0] = 1;
+        while (!q.isEmpty()) {
+            Node next = q.poll();
+            int x = next.getX();
+            int y = next.getY();
 
-        return count;
+            List<Node> around = next.around();
+            for (Node node : around) {
+                int nx = node.getX();
+                int ny = node.getY();
+                if (node.isInside() && road[ny][nx] == 1 && visited[ny][nx] == 0) {
+                    q.add(node);
+                    visited[ny][nx] = visited[y][x] + 1;
+                }
+            }
+        }
+        return visited[n - 1][m - 1];
     }
 
     private static class Node {
@@ -45,12 +59,38 @@ public class B2178 {
             this.y = y;
         }
 
+        public List<Node> around() {
+            List<Node> nodes = new ArrayList<>();
+            if (x > 0 && y > 0) {
+                nodes.add(new Node(x, y - 1));
+                nodes.add(new Node(x, y + 1));
+                nodes.add(new Node(x - 1, y));
+                nodes.add(new Node(x + 1, y));
+            } else if (x > 0) {
+                nodes.add(new Node(x, y + 1));
+                nodes.add(new Node(x - 1, y));
+                nodes.add(new Node(x + 1, y));
+            } else if (y > 0) {
+                nodes.add(new Node(x, y - 1));
+                nodes.add(new Node(x, y + 1));
+                nodes.add(new Node(x + 1, y));
+            } else {
+                nodes.add(new Node(x, y + 1));
+                nodes.add(new Node(x + 1, y));
+            }
+            return nodes;
+        }
+
         public int getX() {
             return x;
         }
 
         public int getY() {
             return y;
+        }
+
+        public boolean isInside() {
+            return x < m && y < n;
         }
 
         @Override
