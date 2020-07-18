@@ -1,24 +1,23 @@
-plugins {
-    id 'java'
+allprojects {
+    apply plugin: 'java'
+    sourceCompatibility = 1.8
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        implementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+        runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+    }
+
+    test {
+        useJUnitPlatform()
+    }
 }
 
 sourceSets {
     test {
         java {
-            srcDirs = ['boj/java', 'programmers', 'leetcode', 'codility', 'kakao', 'named_algorithm/java']
+            srcDirs = ['leetcode', 'codility', 'kakao', 'named_algorithm/java']
         }
     }
-}
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    implementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
-    runtimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
-}
-
-test {
-    useJUnitPlatform()
 }

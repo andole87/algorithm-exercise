@@ -1,0 +1,9 @@
+version 'unspecified'
+
+sourceSets {
+    test {
+        java {
+            srcDirs = ['java']
+        }
+    }
+}

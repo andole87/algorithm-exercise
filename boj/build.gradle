@@ -1,0 +1,13 @@
+version 'unspecified'
+
+repositories {
+    mavenCentral()
+}
+
+sourceSets {
+    test {
+        java {
+            srcDirs = ['java']
+        }
+    }
+}
